@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "510256638938",
+    "project_id": "cooklyn-4dee5",
+    "storage_bucket": "cooklyn-4dee5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510256638938:android:a89232fe95733faacfeee3",
+        "android_client_info": {
+          "package_name": "dev.fabled.cooklyn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510256638938-4bslc8eep8jttbvbfprg0bibvs64ins7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUZMps6DiK3CjIRN3yAzAG5kB2Y0xCA58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510256638938-4bslc8eep8jttbvbfprg0bibvs64ins7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
