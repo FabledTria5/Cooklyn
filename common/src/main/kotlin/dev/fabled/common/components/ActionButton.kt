@@ -25,8 +25,8 @@ fun ActionButton(
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(containerColor = Active),
         elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 10.dp,
-            pressedElevation = 15.dp
+            defaultElevation = 15.dp,
+            pressedElevation = 10.dp
         ),
         shape = RoundedCornerShape(10.dp)
     ) {

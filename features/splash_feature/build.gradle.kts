@@ -6,7 +6,6 @@ plugins {
 }
 
 android {
-    namespace = Config.applicationId
     compileSdk = Config.compileSdk
 
     defaultConfig {
@@ -14,7 +13,6 @@ android {
         targetSdk = Config.targetSdk
 
         testInstrumentationRunner = Config.testRunner
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -40,12 +38,19 @@ android {
 dependencies {
 
     implementation(project(":common"))
+    implementation(project(":domain"))
+    implementation(project(":navigation"))
 
     // Core
     implementation(dependencyNotation = Dependencies.kotlinCoreKtx)
 
     // Dagger Hilt
     implementation(dependencyNotation = Dependencies.hiltAndroid)
-    implementation(dependencyNotation = Dependencies.hiltCompose)
     kapt(dependencyNotation = Dependencies.hiltCompiler)
+
+    // Tests
+    testImplementation(dependencyNotation = Dependencies.junit)
+    androidTestImplementation(dependencyNotation = Dependencies.androidJunit)
+    androidTestImplementation(dependencyNotation = Dependencies.espressoCore)
+    androidTestImplementation(dependencyNotation = Dependencies.junitCompose)
 }

@@ -1,5 +1,9 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":features:on_boarding_feature")
+include(":data:frameworks")
+
+
 pluginManagement {
     repositories {
         google()

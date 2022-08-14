@@ -7,7 +7,6 @@ plugins {
 }
 
 android {
-    namespace = Config.applicationId
     compileSdk = Config.compileSdk
 
     defaultConfig {
@@ -15,7 +14,10 @@ android {
         targetSdk = Config.targetSdk
 
         testInstrumentationRunner = Config.testRunner
-        consumerProguardFiles("consumer-rules.pro")
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
     }
 
     buildTypes {

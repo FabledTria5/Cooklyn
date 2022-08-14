@@ -68,6 +68,9 @@ object Versions {
     const val kotlin_serialization_converter_version = "0.8.0"
     const val logging_interceptor_version = "5.0.0-alpha.10"
 
+    // Preferences
+    const val preferences_datastore_version = "1.0.0"
+
     // Jsoup
     const val jsoup_version = "1.15.2"
 
@@ -102,8 +105,10 @@ object Dependencies {
     const val desugar = "com.android.tools:desugar_jdk_libs:${Versions.desugar_version}"
 
     // Firebase
-    const val firebaseAuth = "com.google.firebase:firebase-auth-ktx:${Versions.firebase_auth_version}"
-    const val fireStore = "com.google.firebase:firebase-firestore-ktx:${Versions.fire_store_version}"
+    const val firebaseAuth =
+        "com.google.firebase:firebase-auth-ktx:${Versions.firebase_auth_version}"
+    const val fireStore =
+        "com.google.firebase:firebase-firestore-ktx:${Versions.fire_store_version}"
     const val firebaseCoroutines =
         "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutines_core_version}"
 
@@ -113,11 +118,13 @@ object Dependencies {
 
     // Compose
     const val composeUi = "androidx.compose.ui:ui:${Versions.compose_version}"
-    const val composeMaterial = "androidx.compose.material3:material3:${Versions.compose_material_version}"
+    const val composeMaterial =
+        "androidx.compose.material3:material3:${Versions.compose_material_version}"
     const val composeToolingPreview =
         "androidx.compose.ui:ui-tooling-preview:${Versions.compose_version}"
     const val composeTooling = "androidx.compose.ui:ui-tooling:${Versions.compose_version}"
-    const val activityCompose = "androidx.activity:activity-compose:${Versions.activity_compose_version}"
+    const val activityCompose =
+        "androidx.activity:activity-compose:${Versions.activity_compose_version}"
     const val composeUiUtil = "androidx.compose.ui:ui-util:${Versions.compose_version}"
     const val junitCompose = "androidx.compose.ui:ui-test-junit4:${Versions.compose_version}"
     const val customview = "androidx.customview:customview:${Versions.customview_version}"
@@ -136,12 +143,14 @@ object Dependencies {
     const val pager = "com.google.accompanist:accompanist-pager:${Versions.accompanist_version}"
     const val pagerIndicators =
         "com.google.accompanist:accompanist-pager-indicators:${Versions.accompanist_version}"
-    const val flowLayout = "com.google.accompanist:accompanist-flowlayout:${Versions.accompanist_version}"
+    const val flowLayout =
+        "com.google.accompanist:accompanist-flowlayout:${Versions.accompanist_version}"
 
     // Dagger Hilt
     const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hilt_android_version}"
     const val hiltCompose = "androidx.hilt:hilt-navigation-compose:${Versions.hilt_compose_version}"
-    const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt_android_version}"
+    const val hiltCompiler =
+        "com.google.dagger:hilt-android-compiler:${Versions.hilt_android_version}"
 
     // Paging
     const val pagingRuntime = "androidx.paging:paging-runtime:${Versions.paging_version}"
@@ -154,6 +163,10 @@ object Dependencies {
     const val roomPaging = "androidx.room:room-paging:${Versions.room_version}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room_version}"
 
+    // Preferences
+    const val preferencesDatastore =
+        "androidx.datastore:datastore-preferences:${Versions.preferences_datastore_version}"
+
     // Network
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit_version}"
     const val kotlinSerializationConverter =
@@ -165,7 +178,8 @@ object Dependencies {
     // Testing
     const val junit = "junit:junit:${Versions.jUnit_version}"
     const val androidJunit = "androidx.test.ext:junit:${Versions.android_jUnit_version}"
-    const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso_core_version}"
+    const val espressoCore =
+        "androidx.test.espresso:espresso-core:${Versions.espresso_core_version}"
 
     // Logging
     const val timber = "com.jakewharton.timber:timber:${Versions.timber_version}"
