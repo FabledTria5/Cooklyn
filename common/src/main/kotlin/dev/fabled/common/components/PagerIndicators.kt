@@ -2,6 +2,7 @@ package dev.fabled.common.components
 
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
@@ -25,31 +26,37 @@ import kotlinx.coroutines.launch
 @Composable
 fun PagerIndicators(pagerState: PagerState, modifier: Modifier = Modifier) {
     LazyRow(modifier = modifier) {
-        items(pagerState.pageCount) { item ->
-            if (item == pagerState.currentPage) {
-                Canvas(
-                    modifier = Modifier
-                        .size(width = 35.dp, height = 10.dp)
-                        .animateItemPlacement(
-                            animationSpec = spring(
-                                dampingRatio = Spring.DampingRatioMediumBouncy,
-                                stiffness = Spring.StiffnessMedium
+        (0 until pagerState.pageCount).forEach { page ->
+            if (page == pagerState.currentPage) {
+                item {
+                    Canvas(
+                        modifier = Modifier
+                            .size(width = 30.dp, height = 5.dp)
+                            .animateItemPlacement(
+                                animationSpec = spring(
+                                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                                    stiffness = Spring.StiffnessMedium
+                                )
                             )
-                        )
-                ) {
-                    drawRoundRect(color = Active, cornerRadius = CornerRadius(10f, 10f))
+                    ) {
+                        drawRoundRect(color = Active, cornerRadius = CornerRadius(15f, 15f))
+                    }
                 }
-            } else {
-                Canvas(modifier = Modifier.size(10.dp).animateItemPlacement(
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioMediumBouncy,
-                        stiffness = Spring.StiffnessMedium
-                    )
-                )) {
-                    drawCircle(color = Color.LightGray)
+            } else
+                item {
+                    Canvas(
+                        modifier = Modifier
+                            .size(5.dp)
+                            .animateItemPlacement(
+                                animationSpec = tween()
+                            )
+                    ) {
+                        drawCircle(color = Color.LightGray)
+                    }
                 }
+            item {
+                Spacer(modifier = Modifier.width(10.dp))
             }
-            Spacer(modifier = Modifier.width(10.dp))
         }
     }
 }

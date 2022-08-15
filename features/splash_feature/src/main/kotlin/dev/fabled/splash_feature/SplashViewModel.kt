@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.fabled.domain.use_cases.startup.GetLaunchState
+import dev.fabled.domain.use_cases.startup.SaveLaunchState
 import dev.fabled.navigation.NavigationManager
 import dev.fabled.navigation.nav_directions.AuthorizationDirections
 import dev.fabled.navigation.nav_directions.OnBoardingDirections
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val navigationManager: NavigationManager,
-    private val readLaunchState: GetLaunchState
+    private val readLaunchState: GetLaunchState,
+    private val saveLaunchState: SaveLaunchState
 ) : ViewModel() {
 
     init {
@@ -28,8 +30,10 @@ class SplashViewModel @Inject constructor(
             if (isFirstLaunch) {
                 delay(timeMillis = 1000)
                 openOnBoarding()
+//                saveLaunchState()
             } else {
                 delay(timeMillis = 500)
+                openHomeScreen()
             }
         }
         .launchIn(viewModelScope)

@@ -8,10 +8,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
-//    private val navigationManager: NavigationManager
+    private val navigationManager: NavigationManager
 ): ViewModel() {
 
-
-//    fun openAuthorization() = navigationManager.navigate(AuthorizationDirections.authorization)
+    fun openAuthorization() = navigationManager.navigate(AuthorizationDirections.authorization)
 
 }
