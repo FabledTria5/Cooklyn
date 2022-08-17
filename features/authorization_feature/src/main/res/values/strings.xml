@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="web_client_id" translatable="false">510256638938-4bslc8eep8jttbvbfprg0bibvs64ins7.apps.googleusercontent.com</string>
+    <string name="google_sign_in">Sign in with Google</string>
+    <string name="authorization_error">Authorization error</string>
+</resources>

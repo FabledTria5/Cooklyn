@@ -64,15 +64,11 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":features:splash_feature"))
     implementation(project(":features:on_boarding_feature"))
+    implementation(project(":features:authorization_feature"))
 
     // Core
     implementation(dependencyNotation = Dependencies.kotlinCoreKtx)
     coreLibraryDesugaring(dependencyNotation = Dependencies.desugar)
-
-    // Firebase
-    implementation(dependencyNotation = Dependencies.firebaseAuth)
-    implementation(dependencyNotation = Dependencies.fireStore)
-    implementation(dependencyNotation = Dependencies.firebaseCoroutines)
 
     // Accompanist
     implementation(dependencyNotation = Dependencies.systemUiController)

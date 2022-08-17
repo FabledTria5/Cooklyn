@@ -15,4 +15,12 @@ object AuthorizationDirections {
 
     }
 
+    val recommendations = object : NavigationCommand {
+        override val arguments: List<NamedNavArgument> = emptyList()
+
+        override val route: String = "recommendations_screen"
+
+        override val inclusive: Boolean = true
+    }
+
 }

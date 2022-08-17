@@ -35,6 +35,8 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
+
     // Core
     implementation(dependencyNotation = Dependencies.kotlinCoreKtx)
     api(dependencyNotation = Dependencies.lifecycleRuntime)

@@ -34,6 +34,7 @@ object Versions {
     const val firebase_auth_version = "21.0.7"
     const val fire_store_version = "24.2.2"
     const val coroutines_core_version = "1.6.4"
+    const val google_authentication_version = "20.2.0"
 
     // Design
     const val appCompat_version = "1.6.0-beta01"
@@ -111,6 +112,7 @@ object Dependencies {
         "com.google.firebase:firebase-firestore-ktx:${Versions.fire_store_version}"
     const val firebaseCoroutines =
         "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutines_core_version}"
+    const val googleAuthentication = "com.google.android.gms:play-services-auth:${Versions.google_authentication_version}"
 
     // Design
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appCompat_version}"
