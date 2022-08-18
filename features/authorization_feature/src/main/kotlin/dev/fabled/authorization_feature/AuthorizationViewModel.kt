@@ -13,7 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.fabled.domain.model.Resource
 import dev.fabled.domain.use_cases.authorization.AuthenticateWithToken
 import dev.fabled.navigation.NavigationManager
-import dev.fabled.navigation.nav_directions.AuthorizationDirections
+import dev.fabled.navigation.nav_directions.PrimaryAppDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
@@ -52,14 +52,11 @@ class AuthorizationViewModel @Inject constructor(
     fun authorizeUser(googleIdToken: String?) = authenticateWithToken(authToken = googleIdToken)
         .onEach { authResult ->
             when (authResult) {
-                is Resource.Success -> openRecommendationScreen()
+                is Resource.Success -> navigationManager.navigate(PrimaryAppDirections.home)
                 else -> authenticationResult = authResult
             }
         }
         .flowOn(Dispatchers.IO)
         .launchIn(viewModelScope)
-
-    private fun openRecommendationScreen() =
-        navigationManager.navigate(AuthorizationDirections.recommendations)
 
 }

@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":features:home_feature")
+
+
 include(":features:authorization_feature")
 
 

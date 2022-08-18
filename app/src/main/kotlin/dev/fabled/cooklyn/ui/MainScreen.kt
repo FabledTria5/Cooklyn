@@ -19,7 +19,8 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.fabled.cooklyn.components.BottomNavigationBar
-import dev.fabled.cooklyn.graphs.authenticationGraph
+import dev.fabled.cooklyn.graphs.authorizationGraph
+import dev.fabled.cooklyn.graphs.primaryGraph
 import dev.fabled.navigation.NavigationCommand
 import dev.fabled.navigation.NavigationManager
 import dev.fabled.navigation.nav_directions.OnBoardingDirections
@@ -99,6 +100,7 @@ fun PrimaryNavigation(
         ) {
             OnBoardingScreen(onBoardingViewModel = hiltViewModel())
         }
-        authenticationGraph()
+        authorizationGraph()
+        primaryGraph()
     }
 }

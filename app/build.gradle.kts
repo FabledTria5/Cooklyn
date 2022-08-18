@@ -65,6 +65,7 @@ dependencies {
     implementation(project(":features:splash_feature"))
     implementation(project(":features:on_boarding_feature"))
     implementation(project(":features:authorization_feature"))
+    implementation(project(":features:home_feature"))
 
     // Core
     implementation(dependencyNotation = Dependencies.kotlinCoreKtx)

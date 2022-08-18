@@ -41,7 +41,7 @@ import timber.log.Timber
 
 @Composable
 fun AuthorizationScreen(
-    authorizationViewModel: AuthorizationViewModel,
+    authorizationViewModel: AuthorizationViewModel
 ) {
     val context = LocalContext.current
 
@@ -85,7 +85,6 @@ fun AuthorizationScreen(
             .padding(horizontal = 15.dp)
             .fillMaxSize(),
         onSignInClicked = authorizationViewModel::beginSignIn,
-        isSignInButtonEnabled = !signInResult.isLoading() && !authenticationResult.isLoading(),
         isSignInFormEnabled = !authenticationResult.isLoading()
     )
 }
@@ -101,7 +100,6 @@ fun AuthenticationLoadingContent(modifier: Modifier = Modifier) {
 fun AuthenticationScreenContent(
     modifier: Modifier = Modifier,
     onSignInClicked: () -> Unit,
-    isSignInButtonEnabled: Boolean,
     isSignInFormEnabled: Boolean
 ) {
     val authenticationFormAlpha = animateFloatAsState(
@@ -130,8 +128,7 @@ fun AuthenticationScreenContent(
                     .padding(bottom = 20.dp),
                 shape = RoundedCornerShape(15.dp),
                 border = BorderStroke(width = 1.dp, color = Color.LightGray),
-                contentPadding = PaddingValues(15.dp),
-                enabled = isSignInButtonEnabled && isSignInFormEnabled
+                contentPadding = PaddingValues(15.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_google),
@@ -151,24 +148,25 @@ fun AuthenticationScreenContent(
                 text = buildAnnotatedString {
                     append(
                         text = AnnotatedString(
-                            text = "By sign in, you are agreeing to our\n",
+                            text = stringResource(R.string.by_sign_in),
                             spanStyle = SpanStyle(color = Color.Gray)
                         )
                     )
                     append(
                         text = AnnotatedString(
-                            text = "User Agreement ",
+                            text = stringResource(R.string.user_agreement),
                             SpanStyle(color = Color.Black, fontWeight = FontWeight.Bold)
                         )
                     )
                     append(
                         text = AnnotatedString(
-                            text = "and ", spanStyle = SpanStyle(color = Color.Gray)
+                            text = stringResource(R.string.and),
+                            spanStyle = SpanStyle(color = Color.Gray)
                         )
                     )
                     append(
                         text = AnnotatedString(
-                            text = "Privacy Policy",
+                            text = stringResource(R.string.privacy_policy),
                             SpanStyle(color = Color.Black, fontWeight = FontWeight.Bold)
                         )
                     )
