@@ -6,10 +6,7 @@ import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -67,7 +64,7 @@ fun BottomNavigationBar(navController: NavHostController, currentDestination: St
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = Active,
                     unselectedIconColor = Color.LightGray,
-                    indicatorColor = Color.Transparent
+                    indicatorColor = MaterialTheme.colorScheme.background
                 )
             )
         }

@@ -1,6 +1,8 @@
 package dev.fabled.cooklyn.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -17,9 +19,10 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.fabled.cooklyn.components.BottomNavigationBar
+import dev.fabled.cooklyn.graphs.authorizationGraph
+import dev.fabled.cooklyn.graphs.primaryGraph
 import dev.fabled.navigation.NavigationCommand
 import dev.fabled.navigation.NavigationManager
-import dev.fabled.navigation.nav_directions.AuthorizationDirections
 import dev.fabled.navigation.nav_directions.OnBoardingDirections
 import dev.fabled.navigation.nav_directions.SplashDirections
 import dev.fabled.on_boarding_feature.screens.OnBoardingScreen
@@ -74,7 +77,10 @@ fun MainScreen(navigationManager: NavigationManager) {
 
 @ExperimentalAnimationApi
 @Composable
-fun PrimaryNavigation(navController: NavHostController, modifier: Modifier = Modifier) {
+fun PrimaryNavigation(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     AnimatedNavHost(
         navController = navController,
         modifier = modifier,
@@ -83,11 +89,18 @@ fun PrimaryNavigation(navController: NavHostController, modifier: Modifier = Mod
         composable(route = SplashDirections.splash.route) {
             SplashScreen(splashViewModel = hiltViewModel())
         }
-        composable(route = OnBoardingDirections.onBoarding.route) {
+        composable(
+            route = OnBoardingDirections.onBoarding.route,
+            exitTransition = {
+                slideOutVertically(
+                    animationSpec = tween(durationMillis = 1000),
+                    targetOffsetY = { fullHeight -> -fullHeight }
+                )
+            }
+        ) {
             OnBoardingScreen(onBoardingViewModel = hiltViewModel())
         }
-        composable(route = AuthorizationDirections.authorization.route) {
-
-        }
+        authorizationGraph()
+        primaryGraph()
     }
 }

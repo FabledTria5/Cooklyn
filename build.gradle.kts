@@ -15,6 +15,7 @@ buildscript {
         classpath(dependencyNotation = Dependencies.hiltAndroidPlugin)
         classpath(dependencyNotation = Dependencies.googleServices)
         classpath(dependencyNotation = Dependencies.gradleDependencies)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
     }
 }
 

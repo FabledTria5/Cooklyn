@@ -37,6 +37,13 @@ dependencies {
 
     // Core
     implementation(dependencyNotation = Dependencies.kotlinCoreKtx)
+    implementation(dependencyNotation = Dependencies.timber)
+
+    // Authentication
+    api(dependencyNotation = Dependencies.firebaseAuth)
+    api(dependencyNotation = Dependencies.fireStore)
+    implementation(dependencyNotation = Dependencies.googleAuthentication)
+    implementation(dependencyNotation = Dependencies.firebaseCoroutines)
 
     // Dagger Hilt
     implementation(dependencyNotation = Dependencies.hiltAndroid)
@@ -44,6 +51,6 @@ dependencies {
     kapt(dependencyNotation = Dependencies.hiltCompiler)
 
     // Tests
-    testApi(dependencyNotation = Dependencies.junit)
-    androidTestApi(dependencyNotation = Dependencies.androidJunit)
+    testImplementation(dependencyNotation = Dependencies.junit)
+    androidTestImplementation(dependencyNotation = Dependencies.androidJunit)
 }

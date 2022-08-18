@@ -1,5 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":features:home_feature")
+
+
+include(":features:authorization_feature")
+
+
 include(":features:on_boarding_feature")
 include(":data:frameworks")
 

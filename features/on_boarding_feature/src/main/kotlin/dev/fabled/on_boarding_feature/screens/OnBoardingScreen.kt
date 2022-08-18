@@ -3,6 +3,8 @@ package dev.fabled.on_boarding_feature.screens
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.core.animateOffsetAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -10,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
@@ -48,7 +51,7 @@ fun OnBoardingScreen(onBoardingViewModel: OnBoardingViewModel) {
 
     val onActionButtonClicked = remember {
         {
-            if (isLastPage) onBoardingViewModel.openAuthorization()
+            if (isLastPage) onBoardingViewModel.onBoardingCompleted()
             else scope.launch {
                 pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
             }
@@ -65,6 +68,11 @@ fun OnBoardingScreen(onBoardingViewModel: OnBoardingViewModel) {
         }
     }
 
+    val skipButtonOffset by animateOffsetAsState(
+        targetValue = if (!isLastPage) Offset(x = 0f, y = 0f) else Offset(x = -200f, y = 0f),
+        animationSpec = tween(durationMillis = 1000)
+    )
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
@@ -80,8 +88,9 @@ fun OnBoardingScreen(onBoardingViewModel: OnBoardingViewModel) {
                 .padding(horizontal = 15.dp, vertical = 30.dp)
                 .fillMaxWidth(),
             actionButtonText = actionButtonText,
+            skipButtonOffset = skipButtonOffset,
             onActionButtonClicked = onActionButtonClicked,
-            onSkipClicked = onBoardingViewModel::openAuthorization
+            onSkipClicked = onBoardingViewModel::onBoardingCompleted
         )
     }
 }
@@ -148,6 +157,7 @@ fun OnBoardingPage(onBoardingPage: OnBoardingPage) {
 fun OnBoardingButtons(
     modifier: Modifier = Modifier,
     actionButtonText: String,
+    skipButtonOffset: Offset,
     onActionButtonClicked: () -> Unit,
     onSkipClicked: () -> Unit
 ) {
@@ -158,7 +168,9 @@ fun OnBoardingButtons(
     ) {
         Text(
             text = stringResource(id = R.string.skip_button),
-            modifier = Modifier.clickable { onSkipClicked() },
+            modifier = Modifier
+                .clickable { onSkipClicked() }
+                .offset(x = skipButtonOffset.x.dp, y = skipButtonOffset.y.dp),
             color = Color.DarkGray,
             fontFamily = SegoeUi,
             fontWeight = FontWeight.SemiBold,

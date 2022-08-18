@@ -25,7 +25,7 @@ class AppPreferencesRepositoryImpl @Inject constructor(
 
     override suspend fun persistLaunchState() {
         datastore.edit { preferences ->
-            preferences[PreferencesKeys.launchStateKey] = true
+            preferences[PreferencesKeys.launchStateKey] = false
         }
     }
 
