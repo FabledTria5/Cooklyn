@@ -1,6 +1,8 @@
 package dev.fabled.cooklyn.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -9,20 +11,21 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.fabled.cooklyn.components.BottomNavigationBar
+import dev.fabled.cooklyn.graphs.authorizationGraph
+import dev.fabled.cooklyn.graphs.primaryGraph
 import dev.fabled.navigation.NavigationCommand
 import dev.fabled.navigation.NavigationManager
-import dev.fabled.navigation.nav_directions.AuthorizationDirections
 import dev.fabled.navigation.nav_directions.OnBoardingDirections
 import dev.fabled.navigation.nav_directions.SplashDirections
+import dev.fabled.on_boarding_feature.screens.OnBoardingScreen
 import dev.fabled.splash_feature.screens.SplashScreen
 import kotlinx.coroutines.flow.collectLatest
 
@@ -34,7 +37,7 @@ fun MainScreen(navigationManager: NavigationManager) {
 
     val navController = rememberAnimatedNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination?.route.orEmpty()
+    val currentDestination = navBackStackEntry?.destination?.route
     var inclusiveScreen by remember { mutableStateOf(true) }
 
     LaunchedEffect(key1 = navigationManager.commands) {
@@ -45,7 +48,9 @@ fun MainScreen(navigationManager: NavigationManager) {
             }
             navController.navigate(navigationCommand.route) {
                 if (inclusiveScreen) {
-                    popUpTo(currentDestination) { inclusive = true }
+                    currentDestination?.let { route ->
+                        popUpTo(route) { inclusive = inclusiveScreen }
+                    }
                 }
             }
             inclusiveScreen = navigationCommand.inclusive
@@ -57,7 +62,7 @@ fun MainScreen(navigationManager: NavigationManager) {
         bottomBar = {
             BottomNavigationBar(
                 navController = navController,
-                currentDestination = currentDestination
+                currentDestination = currentDestination.orEmpty()
             )
         }
     ) { scaffoldPadding ->
@@ -72,7 +77,10 @@ fun MainScreen(navigationManager: NavigationManager) {
 
 @ExperimentalAnimationApi
 @Composable
-fun PrimaryNavigation(navController: NavHostController, modifier: Modifier = Modifier) {
+fun PrimaryNavigation(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     AnimatedNavHost(
         navController = navController,
         modifier = modifier,
@@ -81,11 +89,18 @@ fun PrimaryNavigation(navController: NavHostController, modifier: Modifier = Mod
         composable(route = SplashDirections.splash.route) {
             SplashScreen(splashViewModel = hiltViewModel())
         }
-        composable(route = OnBoardingDirections.onBoarding.route) {
-
+        composable(
+            route = OnBoardingDirections.onBoarding.route,
+            exitTransition = {
+                slideOutVertically(
+                    animationSpec = tween(durationMillis = 1000),
+                    targetOffsetY = { fullHeight -> -fullHeight }
+                )
+            }
+        ) {
+            OnBoardingScreen(onBoardingViewModel = hiltViewModel())
         }
-        composable(route = AuthorizationDirections.authorization.route) {
-
-        }
+        authorizationGraph()
+        primaryGraph()
     }
 }

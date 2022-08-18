@@ -7,7 +7,6 @@ plugins {
 }
 
 android {
-    namespace = Config.applicationId
     compileSdk = Config.compileSdk
 
     defaultConfig {
@@ -35,6 +34,8 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+
         sourceCompatibility = Config.javaVersion
         targetCompatibility = Config.javaVersion
     }
@@ -56,15 +57,19 @@ android {
 
 dependencies {
 
-    implementation(project(":data:repository"))
     implementation(project(":common"))
+    implementation(project(":domain"))
+    implementation(project(":data:repository"))
+    implementation(project(":data:frameworks"))
     implementation(project(":navigation"))
     implementation(project(":features:splash_feature"))
+    implementation(project(":features:on_boarding_feature"))
+    implementation(project(":features:authorization_feature"))
+    implementation(project(":features:home_feature"))
 
-    // Firebase
-    implementation(dependencyNotation = Dependencies.firebaseAuth)
-    implementation(dependencyNotation = Dependencies.fireStore)
-    implementation(dependencyNotation = Dependencies.firebaseCoroutines)
+    // Core
+    implementation(dependencyNotation = Dependencies.kotlinCoreKtx)
+    coreLibraryDesugaring(dependencyNotation = Dependencies.desugar)
 
     // Accompanist
     implementation(dependencyNotation = Dependencies.systemUiController)

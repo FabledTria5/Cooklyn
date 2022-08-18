@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Cooklyn</string>
+    <string name="web_client_id" translatable="false">510256638938-4bslc8eep8jttbvbfprg0bibvs64ins7.apps.googleusercontent.com</string>
 </resources>

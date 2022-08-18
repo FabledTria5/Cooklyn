@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="dev.fabled.cooklyn">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".CooklynApplication"
         android:allowBackup="true"
@@ -13,20 +15,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cooklyn"
-        tools:targetApi="31">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="33">
         <activity
-            android:name="dev.fabled.cooklyn.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Cooklyn">
+            android:theme="@style/Theme.Cooklyn"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
     </application>
 

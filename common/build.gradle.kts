@@ -4,7 +4,6 @@ plugins {
 }
 
 android {
-    namespace = Config.applicationId
     compileSdk = Config.compileSdk
 
     defaultConfig {
@@ -12,7 +11,6 @@ android {
         targetSdk = Config.targetSdk
 
         testInstrumentationRunner = Config.testRunner
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -37,6 +35,8 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
+
     // Core
     implementation(dependencyNotation = Dependencies.kotlinCoreKtx)
     api(dependencyNotation = Dependencies.lifecycleRuntime)
@@ -57,10 +57,4 @@ dependencies {
 
     // Accompanist
     implementation(dependencyNotation = Dependencies.pager)
-
-    // Tests
-    testApi(dependencyNotation = Dependencies.junit)
-    androidTestApi(dependencyNotation = Dependencies.androidJunit)
-    androidTestApi(dependencyNotation = Dependencies.espressoCore)
-    androidTestApi(dependencyNotation = Dependencies.junitCompose)
 }

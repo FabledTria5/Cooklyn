@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="google_sign_in">Sign in with Google</string>
+    <string name="authorization_error">Authorization error</string>
+    <string name="by_sign_in">By sign in, you are agreeing to our\n</string>
+    <string name="user_agreement">User Agreement </string>
+    <string name="and">"and </string>
+    <string name="privacy_policy">Privacy Policy</string>
+</resources>

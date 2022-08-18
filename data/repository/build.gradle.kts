@@ -6,7 +6,6 @@ plugins {
 }
 
 android {
-    namespace = Config.applicationId
     compileSdk = Config.compileSdk
 
     defaultConfig {
@@ -14,7 +13,6 @@ android {
         targetSdk = Config.targetSdk
 
         testInstrumentationRunner = Config.testRunner
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -33,11 +31,19 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
     implementation(project(":data:database"))
     implementation(project(":data:network"))
 
     // Core
     implementation(dependencyNotation = Dependencies.kotlinCoreKtx)
+    implementation(dependencyNotation = Dependencies.timber)
+
+    // Authentication
+    api(dependencyNotation = Dependencies.firebaseAuth)
+    api(dependencyNotation = Dependencies.fireStore)
+    implementation(dependencyNotation = Dependencies.googleAuthentication)
+    implementation(dependencyNotation = Dependencies.firebaseCoroutines)
 
     // Dagger Hilt
     implementation(dependencyNotation = Dependencies.hiltAndroid)
@@ -45,6 +51,6 @@ dependencies {
     kapt(dependencyNotation = Dependencies.hiltCompiler)
 
     // Tests
-    testApi(dependencyNotation = Dependencies.junit)
-    androidTestApi(dependencyNotation = Dependencies.androidJunit)
+    testImplementation(dependencyNotation = Dependencies.junit)
+    androidTestImplementation(dependencyNotation = Dependencies.androidJunit)
 }

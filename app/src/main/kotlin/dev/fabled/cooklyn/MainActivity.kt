@@ -8,11 +8,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
+import dagger.hilt.android.AndroidEntryPoint
 import dev.fabled.common.ui.CooklynTheme
 import dev.fabled.cooklyn.ui.MainScreen
 import dev.fabled.navigation.NavigationManager
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     @Inject
@@ -28,7 +30,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen(navigationManager = navigationManager)
+                    MainScreen(
+                        navigationManager = navigationManager
+                    )
                 }
             }
         }

@@ -3,7 +3,7 @@ package dev.fabled.common.ui
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import dev.fabled.cooklyn.R
+import dev.fabled.common.R
 
 val SegoeUi = FontFamily(
     Font(resId = R.font.segoe_ui_regular),
