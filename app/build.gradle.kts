@@ -62,9 +62,9 @@ dependencies {
     implementation(project(":data:repository"))
     implementation(project(":data:frameworks"))
     implementation(project(":navigation"))
-    implementation(project(":features:splash_feature"))
-    implementation(project(":features:on_boarding_feature"))
+    implementation(project(":features:welcome_feature"))
     implementation(project(":features:authorization_feature"))
+    implementation(project(":features:recommendations_feature"))
     implementation(project(":features:home_feature"))
 
     // Core

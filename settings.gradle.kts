@@ -1,12 +1,14 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":features:recommendations_feature")
+
+
 include(":features:home_feature")
 
 
 include(":features:authorization_feature")
 
 
-include(":features:on_boarding_feature")
 include(":data:frameworks")
 
 
@@ -28,7 +30,7 @@ rootProject.name = "Cooklyn"
 include(":app")
 include(":common")
 include(":features")
-include(":features:splash_feature")
+include(":features:welcome_feature")
 include(":navigation")
 include(":domain")
 include(":data")

@@ -27,7 +27,7 @@ object Versions {
     // Kotlin
     const val kotlin_version = "1.8.0"
     const val lifecycle_runtime_version = "2.6.0-alpha01"
-    const val kotlin_serialization_version = "1.4.0-RC"
+    const val kotlin_serialization_version = "1.4.0"
     const val desugar_version = "1.1.5"
 
     // Firebase

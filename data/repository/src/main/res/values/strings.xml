@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="china">China</string>
+    <string name="france">France</string>
+    <string name="germany">Germany</string>
+    <string name="india">India</string>
+    <string name="italy">Italy</string>
+    <string name="japan">Japan</string>
+    <string name="korea">Korea</string>
+    <string name="mexico">Mexico</string>
+    <string name="spain">Spain</string>
+    <string name="uk">United Kingdom</string>
+    <string name="usa">USA</string>
+    <string name="vietnam">Vietnam</string>
+
+    <string name="ketogenic">Ketogenic</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="lactose_vegetarian">Lactose Vegetarian</string>
+    <string name="perscetarian">Perscetarian</string>
+    <string name="dairy">Dairy</string>
+    <string name="egg">Egg</string>
+    <string name="gluten">Gluten</string>
+    <string name="grain">Grain</string>
+    <string name="peanut">Peanut</string>
+    <string name="seafood">Seafood</string>
+    <string name="soy">Soy</string>
+    <string name="tree_nut">Tree nut</string>
+    <string name="wheat">Wheat</string>
+</resources>
