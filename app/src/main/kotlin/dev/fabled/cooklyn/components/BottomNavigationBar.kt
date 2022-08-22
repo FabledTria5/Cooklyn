@@ -1,8 +1,7 @@
 package dev.fabled.cooklyn.components
 
-import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -28,7 +27,7 @@ fun BottomNavigationBar(navController: NavHostController, currentDestination: St
 
     val bottomBarHeight by animateDpAsState(
         targetValue = if (isBottomBarEnabled) 80.dp else 0.dp,
-        animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy)
+        animationSpec = tween(delayMillis = 1000)
     )
 
     NavigationBar(

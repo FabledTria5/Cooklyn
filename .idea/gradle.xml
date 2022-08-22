@@ -22,8 +22,8 @@
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/authorization_feature" />
             <option value="$PROJECT_DIR$/features/home_feature" />
-            <option value="$PROJECT_DIR$/features/on_boarding_feature" />
-            <option value="$PROJECT_DIR$/features/splash_feature" />
+            <option value="$PROJECT_DIR$/features/recommendations_feature" />
+            <option value="$PROJECT_DIR$/features/welcome_feature" />
             <option value="$PROJECT_DIR$/navigation" />
           </set>
         </option>

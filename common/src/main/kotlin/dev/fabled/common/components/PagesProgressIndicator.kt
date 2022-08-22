@@ -19,27 +19,28 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.PagerState
 import dev.fabled.common.ui.Active
 
+@ExperimentalPagerApi
 @Composable
 fun PagesProgressIndicator(
-    currentStep: Int,
-    stepsCount: Int,
+    pagerState: PagerState,
     modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier, verticalAlignment = Alignment.CenterVertically
     ) {
-        for (step in 0 until stepsCount) {
+        for (step in 0 until pagerState.pageCount) {
             Step(
                 modifier = Modifier.weight(1f),
                 step = (step + 1).toString(),
-                isCompete = step < currentStep,
-                isCurrent = step == currentStep,
-                isLast = step == stepsCount - 1,
+                isCompete = step < pagerState.currentPage,
+                isCurrent = step == pagerState.currentPage,
+                isLast = step == pagerState.pageCount - 1,
             )
         }
     }
@@ -125,16 +126,4 @@ fun Step(
                 tint = stepContentColor.value
             )
     }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun IndicatorPreview() {
-    PagesProgressIndicator(
-        stepsCount = 3,
-        currentStep = 1,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(50.dp)
-    )
 }

@@ -7,6 +7,6 @@ class GetLaunchState @Inject constructor(
     private val preferencesRepository: AppPreferencesRepository
 ) {
 
-    operator fun invoke() = preferencesRepository.isFirstLaunch
+    suspend operator fun invoke() = preferencesRepository.isFirstLaunch()
 
 }

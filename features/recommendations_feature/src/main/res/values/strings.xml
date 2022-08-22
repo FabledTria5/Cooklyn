@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_later">Don\'t worry, you can update them later</string>
+    <string name="next">Next</string>
+    <string name="lets_go">Let\'s Gooo !</string>
+
+    <string-array name="pages_names">
+        <item name="page_1">Choose kitchens you like</item>
+        <item name="page_2">Choose diet you want</item>
+        <item name="page_3">Choose your allergies</item>
+    </string-array>
+</resources>
