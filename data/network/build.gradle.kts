@@ -18,7 +18,24 @@ android {
 
     buildTypes {
         release {
+            buildConfigField(
+                type = "String",
+                name = "API_KEY",
+                value = "\"919fb205b3624da79e17d4b60aae39f6\""
+            )
             isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
+            buildConfigField(
+                type = "String",
+                name = "API_KEY",
+                value = "\"919fb205b3624da79e17d4b60aae39f6\""
+            )
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -36,9 +53,10 @@ dependencies {
     implementation(dependencyNotation = Dependencies.kotlinCoreKtx)
 
     // Network
-    implementation(dependencyNotation = Dependencies.retrofit)
+    api(dependencyNotation = Dependencies.retrofit)
     implementation(dependencyNotation = Dependencies.kotlinSerialization)
     implementation(dependencyNotation = Dependencies.kotlinSerializationConverter)
+    implementation(dependencyNotation = Dependencies.loggingInterceptor)
 
     // Dagger Hilt
     implementation(dependencyNotation = Dependencies.hiltAndroid)

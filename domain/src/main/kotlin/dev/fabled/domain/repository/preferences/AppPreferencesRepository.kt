@@ -16,6 +16,6 @@ interface AppPreferencesRepository {
 
     suspend fun getUserDietsTags(): String
 
-    suspend fun getUserIntolerancesIds(): String
+    suspend fun getUserIntolerancesTags(): String
 
 }

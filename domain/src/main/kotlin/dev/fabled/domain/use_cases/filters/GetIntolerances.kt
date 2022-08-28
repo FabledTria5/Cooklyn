@@ -12,7 +12,7 @@ class GetIntolerances @Inject constructor(
 
     suspend operator fun invoke(): List<FilterItem> {
         val intolerances = filtersRepository.getIntolerances()
-        val savedIntolerancesString = appPreferencesRepository.getUserIntolerancesIds()
+        val savedIntolerancesString = appPreferencesRepository.getUserIntolerancesTags()
 
         if (savedIntolerancesString.isEmpty()) return intolerances
 

@@ -48,6 +48,7 @@ dependencies {
     api(dependencyNotation = Dependencies.composeUi)
     api(dependencyNotation = Dependencies.composeMaterial)
     api(dependencyNotation = Dependencies.extendedIcons)
+    implementation(dependencyNotation = Dependencies.coil)
 
     // Compose Preview
     api(dependencyNotation = Dependencies.composeToolingPreview)

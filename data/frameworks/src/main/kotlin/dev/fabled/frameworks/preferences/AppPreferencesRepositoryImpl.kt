@@ -70,7 +70,7 @@ class AppPreferencesRepositoryImpl @Inject constructor(
         }
         .first()
 
-    override suspend fun getUserIntolerancesIds(): String = datastore.data
+    override suspend fun getUserIntolerancesTags(): String = datastore.data
         .catch { exception ->
             if (exception is IOException) emit(emptyPreferences()) else throw exception
         }

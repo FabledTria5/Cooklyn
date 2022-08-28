@@ -1,71 +1,144 @@
 package dev.fabled.home_feature.screens
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Restaurant
-import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.fabled.common.components.PrimaryScreenAppBar
-import dev.fabled.common.ui.Active
+import dev.fabled.common.ui.DarkPrimary
 import dev.fabled.common.ui.SegoeUi
+import dev.fabled.domain.model.RecipeItem
+import dev.fabled.domain.model.Resource
 import dev.fabled.home_feature.HomeViewModel
 import dev.fabled.home_feature.R
+import dev.fabled.home_feature.components.DailyRecipeCard
+import dev.fabled.home_feature.utils.KeyboardState
+import dev.fabled.home_feature.utils.rememberKeyboardState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(homeViewModel: HomeViewModel) {
-    Scaffold(topBar = {
-        PrimaryScreenAppBar(
-            primaryText = "Hi, ${homeViewModel.userName} !",
-            secondaryText = stringResource(R.string.home_screen_secondary),
-            modifier = Modifier.padding(horizontal = 15.dp, vertical = 10.dp)
-        )
-    }) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .padding(top = paddingValues.calculateTopPadding())
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            SearchBar(
-                modifier = Modifier
-                    .padding(15.dp)
-                    .fillMaxWidth()
-            )
-            DailyRecipeCard(
-                modifier = Modifier
-                    .padding(start = 15.dp, top = 10.dp, end = 15.dp)
-                    .fillMaxWidth()
-                    .aspectRatio(ratio = .8f)
-            ) {
+    val dailyRecipe = homeViewModel.dailyRecipe
 
-            }
+    var isSearchEnabled by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 15.dp)
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AnimatedVisibility(
+            visible = !isSearchEnabled,
+            enter = fadeIn() + expandVertically(),
+            exit = fadeOut() + shrinkVertically(),
+            modifier = Modifier.align(Alignment.Start),
+        ) {
+            PrimaryScreenAppBar(
+                primaryText = "Hi, ${homeViewModel.userName} !",
+                secondaryText = stringResource(R.string.home_screen_secondary),
+                modifier = Modifier.padding(top = 10.dp)
+            )
+        }
+        SearchBar(
+            modifier = Modifier
+                .padding(vertical = 25.dp)
+                .fillMaxWidth(),
+            isEnabled = isSearchEnabled,
+            onSearch = homeViewModel::onSearchClicked,
+            onSearchStateChange = { isSearchEnabled = it }
+        )
+        AnimatedVisibility(
+            visible = !isSearchEnabled,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
+            DailyRecipe(
+                modifier = Modifier
+                    .padding(bottom = 20.dp)
+                    .fillMaxWidth()
+                    .aspectRatio(ratio = 1f),
+                dailyRecipe = dailyRecipe,
+                onRecipeClicked = homeViewModel::onRecipeClicked
+            )
         }
     }
 }
 
 @ExperimentalMaterial3Api
 @Composable
-fun SearchBar(modifier: Modifier = Modifier) {
+fun DailyRecipe(
+    modifier: Modifier = Modifier,
+    dailyRecipe: Resource<RecipeItem>,
+    onRecipeClicked: (Int) -> Unit
+) {
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        when (dailyRecipe) {
+            is Resource.Success -> DailyRecipeCard(
+                recipeItem = dailyRecipe.data,
+                modifier = Modifier.fillMaxSize(),
+                onClick = onRecipeClicked
+            )
+            Resource.Loading -> CircularProgressIndicator(
+                color = DarkPrimary,
+                modifier = Modifier.size(30.dp)
+            )
+            is Resource.Error -> CircularProgressIndicator(
+                color = DarkPrimary,
+                modifier = Modifier.size(30.dp)
+            )
+            else -> Unit
+        }
+    }
+}
+
+@ExperimentalMaterial3Api
+@Composable
+fun SearchBar(
+    modifier: Modifier = Modifier,
+    onSearchStateChange: (Boolean) -> Unit,
+    onSearch: (String) -> Unit,
+    isEnabled: Boolean
+) {
+    var searchQuery by remember { mutableStateOf("") }
+    val keyboardState by rememberKeyboardState()
+
+    val focusRequester = FocusRequester()
+    val localFocusManager = LocalFocusManager.current
+
+    LaunchedEffect(key1 = keyboardState) {
+        snapshotFlow { keyboardState }.collect {
+            if (it == KeyboardState.Closed) {
+                focusRequester.freeFocus()
+                localFocusManager.clearFocus()
+
+                onSearchStateChange(false)
+            } else onSearchStateChange(true)
+        }
+    }
+
     OutlinedTextField(
-        value = "",
-        onValueChange = {},
-        modifier = modifier,
+        value = searchQuery,
+        onValueChange = { searchQuery = it },
+        modifier = modifier.focusRequester(focusRequester),
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
@@ -81,7 +154,22 @@ fun SearchBar(modifier: Modifier = Modifier) {
                 fontSize = 16.sp
             )
         },
-        readOnly = true,
+        trailingIcon = {
+            AnimatedVisibility(
+                visible = isEnabled,
+                enter = fadeIn(animationSpec = tween(delayMillis = 500)),
+                exit = fadeOut()
+            ) {
+                Text(
+                    text = stringResource(R.string.add),
+                    modifier = Modifier.padding(end = 5.dp),
+                    color = DarkPrimary,
+                    fontFamily = SegoeUi,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
+            }
+        },
         shape = RoundedCornerShape(15.dp),
         singleLine = true,
         colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -90,85 +178,13 @@ fun SearchBar(modifier: Modifier = Modifier) {
             focusedBorderColor = Color.Transparent,
             disabledBorderColor = Color.Transparent,
             textColor = Color.Black,
+        ),
+        keyboardOptions = KeyboardOptions(
+            capitalization = KeyboardCapitalization.Sentences,
+            imeAction = ImeAction.Search
+        ),
+        keyboardActions = KeyboardActions(
+            onSearch = { onSearch(searchQuery) }
         )
     )
-}
-
-@ExperimentalMaterial3Api
-@Composable
-fun DailyRecipeCard(modifier: Modifier = Modifier, onCLick: () -> Unit) {
-    ElevatedCard(
-        onClick = onCLick,
-        modifier = modifier,
-        shape = RoundedCornerShape(15.dp),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 15.dp),
-    ) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            Image(
-                painter = painterResource(id = R.drawable.pizza_placeholder),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center),
-                contentScale = ContentScale.Crop
-            )
-            Row(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(10.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Restaurant,
-                    contentDescription = null,
-                    modifier = Modifier.padding(end = 5.dp),
-                    tint = Color.White
-                )
-                Text(
-                    text = "Italian",
-                    modifier = Modifier.padding(end = 10.dp),
-                    color = Color.White,
-                    fontFamily = SegoeUi,
-                    fontSize = 12.sp
-                )
-                Icon(
-                    imageVector = Icons.Filled.Schedule,
-                    modifier = Modifier.padding(end = 5.dp),
-                    contentDescription = null,
-                    tint = Color.White
-                )
-                Text(text = "30 mins", color = Color.White, fontFamily = SegoeUi, fontSize = 12.sp)
-            }
-            Column(
-                modifier = Modifier
-                    .padding(horizontal = 10.dp, vertical = 30.dp)
-                    .fillMaxWidth()
-                    .align(Alignment.BottomCenter),
-            ) {
-                Box(
-                    modifier = Modifier
-                        .padding(bottom = 10.dp)
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(Active),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = stringResource(R.string.dish_of_the_day),
-                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
-                        color = Color.Black,
-                        fontFamily = SegoeUi,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 16.sp
-                    )
-                }
-                Text(
-                    text = "Pizzeria Gino Sorbillo",
-                    color = Color.White,
-                    fontFamily = SegoeUi,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 28.sp
-                )
-            }
-        }
-    }
 }

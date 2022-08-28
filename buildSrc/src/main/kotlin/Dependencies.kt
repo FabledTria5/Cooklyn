@@ -40,11 +40,11 @@ object Versions {
     const val appCompat_version = "1.6.0-beta01"
 
     // Compose
-    const val compose_version = "1.3.0-alpha03"
-    const val compose_material_version = "1.0.0-alpha16"
+    const val compose_version = "1.3.0-beta01"
+    const val compose_material_version = "1.0.0-beta01"
     const val activity_compose_version = "1.5.0"
-    const val accompanist_version = "0.26.1-alpha"
-    const val coil_version = "2.1.0"
+    const val accompanist_version = "0.26.2-beta"
+    const val coil_version = "2.2.0"
     const val hilt_compose_version = "1.0.0"
     const val customview_version = "1.2.0-alpha01"
     const val pooling_container_version = "1.0.0"
@@ -62,7 +62,7 @@ object Versions {
     const val timber_version = "5.0.1"
 
     // Room
-    const val room_version = "2.5.0-alpha02"
+    const val room_version = "2.5.0-alpha03"
 
     // Network
     const val retrofit_version = "2.9.0"

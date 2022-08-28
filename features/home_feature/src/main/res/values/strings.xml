@@ -4,4 +4,5 @@
     <string name="searchfield_placeholder">Type and add your ingredients</string>
     <string name="icon_search">Search Icon</string>
     <string name="home_screen_secondary">What do you want to cook today?</string>
+    <string name="add">Add</string>
 </resources>
