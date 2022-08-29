@@ -23,6 +23,7 @@ object DatabaseModule {
             klass = CooklynDatabase::class.java,
             name = "cooklyn_database"
         )
+        .createFromAsset(databaseFilePath = "database/food_db.db")
         .build()
 
     @Provides

@@ -8,11 +8,18 @@ import dev.fabled.database.dao.RecipesDao
 import dev.fabled.database.entity.IngredientEntity
 import dev.fabled.database.entity.NutrientEntity
 import dev.fabled.database.entity.RecipeEntity
-import dev.fabled.database.entity.types.DishOfTheDayRef
+import dev.fabled.database.entity.RecipeIngredientEntity
+import dev.fabled.database.entity.refs.DishOfTheDayRef
 
 @Database(
-    entities = [RecipeEntity::class, NutrientEntity::class, IngredientEntity::class, DishOfTheDayRef::class],
-    version = 1,
+    entities = [
+        RecipeEntity::class,
+        NutrientEntity::class,
+        RecipeIngredientEntity::class,
+        DishOfTheDayRef::class,
+        IngredientEntity::class
+    ],
+    version = 2,
     exportSchema = true
 )
 @TypeConverters(LocalDateConverter::class)

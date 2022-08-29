@@ -1,4 +1,4 @@
-package dev.fabled.database.entity.types
+package dev.fabled.database.entity.refs
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

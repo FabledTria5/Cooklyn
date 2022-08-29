@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import dev.fabled.database.entity.RecipeEntity
-import dev.fabled.database.entity.types.DishOfTheDayRef
+import dev.fabled.database.entity.refs.DishOfTheDayRef
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 
@@ -28,7 +28,7 @@ interface RecipesDao {
     suspend fun getDailyRecipeRef(): LocalDate?
 
     @Query(
-        value = "SELECT * FROM recipes_table " +
+        value = "SELECT recipes_table.* FROM recipes_table " +
                 "INNER JOIN dish_of_the_day_table " +
                 "ON dish_of_the_day_table.recipe_id = recipes_table.recipe_id"
     )
