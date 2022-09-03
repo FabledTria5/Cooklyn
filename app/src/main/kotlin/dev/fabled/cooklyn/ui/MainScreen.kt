@@ -43,7 +43,7 @@ fun MainScreen(navigationManager: NavigationManager) {
     val navController = rememberAnimatedNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination?.route
-    var inclusiveScreen by remember { mutableStateOf(true) }
+    var inclusiveScreen by remember { mutableStateOf(value = true) }
 
     LaunchedEffect(key1 = navigationManager.commands) {
         navigationManager.commands.collectLatest { navigationCommand ->
@@ -133,6 +133,6 @@ fun PrimaryNavigation(
         ) {
             RecommendationsScreen(recommendationsViewModel = hiltViewModel())
         }
-        primaryGraph()
+        primaryGraph(viewModelStoreOwner = viewModelStoreOwner)
     }
 }

@@ -10,7 +10,7 @@ data class IngredientEntity(
     @ColumnInfo(name = "id")
     val id: Int,
     @ColumnInfo(name = "ingredient_id")
-    val recipeId: Int,
+    val ingredientId: Int,
     @ColumnInfo(name = "ingredient_name")
     val ingredientName: String,
     @ColumnInfo(name = "ingredient_image")

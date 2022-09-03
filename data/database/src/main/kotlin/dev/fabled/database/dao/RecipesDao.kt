@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import dev.fabled.database.entity.IngredientEntity
 import dev.fabled.database.entity.RecipeEntity
 import dev.fabled.database.entity.refs.DishOfTheDayRef
 import kotlinx.coroutines.flow.Flow
@@ -43,5 +44,8 @@ interface RecipesDao {
         insertDishOfTheDay(dishReference)
         insertRecipe(recipeEntity)
     }
+
+    @Query(value = "SELECT * FROM ingredients_table")
+    suspend fun getAllIngredients(): List<IngredientEntity>
 
 }

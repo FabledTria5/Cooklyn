@@ -5,14 +5,26 @@ import dev.fabled.navigation.NavigationCommand
 
 object PrimaryAppDirections {
 
-    val home = object : NavigationCommand {
+    object HomeDirections {
+        val home = object : NavigationCommand {
 
-        override val arguments: List<NamedNavArgument> = emptyList()
+            override val arguments: List<NamedNavArgument> = emptyList()
 
-        override val route: String = "home_screen"
+            override val route: String = "home_screen"
 
-        override val inclusive: Boolean = false
+            override val inclusive: Boolean = false
 
+        }
+
+        val ingredients = object : NavigationCommand {
+
+            override val arguments: List<NamedNavArgument> = emptyList()
+
+            override val route: String = "ingredients_screen"
+
+            override val inclusive: Boolean = false
+
+        }
     }
 
     val cookbook = object : NavigationCommand {

@@ -19,7 +19,7 @@ sealed class PrimaryNavigationDestinations(
 ) {
 
     object HomeDestination : PrimaryNavigationDestinations(
-        command = PrimaryAppDirections.home,
+        command = PrimaryAppDirections.HomeDirections.home,
         selectedIcon = Icons.Filled.Home,
         unselectedIcon = Icons.Outlined.Home
     )

@@ -52,7 +52,8 @@ class AuthorizationViewModel @Inject constructor(
     fun authorizeUser(googleIdToken: String?) = authenticateWithToken(authToken = googleIdToken)
         .onEach { authResult ->
             when (authResult) {
-                is Resource.Success -> navigationManager.navigate(PrimaryAppDirections.home)
+                is Resource.Success ->
+                    navigationManager.navigate(PrimaryAppDirections.HomeDirections.home)
                 else -> authenticationResult = authResult
             }
         }

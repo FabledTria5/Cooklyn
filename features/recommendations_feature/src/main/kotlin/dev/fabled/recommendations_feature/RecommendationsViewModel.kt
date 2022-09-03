@@ -62,7 +62,7 @@ class RecommendationsViewModel @Inject constructor(
             recommendationsScreenState = Resource.Loading
 
             filtersCases.saveUserFilters(cuisinesList, dietsList, intolerancesList)
-            navigationManager.navigate(PrimaryAppDirections.home)
+            navigationManager.navigate(PrimaryAppDirections.HomeDirections.home)
         }
     }
 

@@ -8,10 +8,12 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import dev.fabled.domain.repository.FiltersRepository
 import dev.fabled.domain.repository.authentication.AuthRepository
 import dev.fabled.domain.repository.preferences.AppPreferencesRepository
+import dev.fabled.domain.repository.recipes.IngredientsRepository
 import dev.fabled.domain.repository.recipes.RecipesRepository
 import dev.fabled.frameworks.preferences.AppPreferencesRepositoryImpl
 import dev.fabled.repository.repository.authentication.AuthRepositoryImpl
 import dev.fabled.repository.repository.filters.FiltersRepositoryImpl
+import dev.fabled.repository.repository.recipes.IngredientsRepositoryImpl
 import dev.fabled.repository.repository.recipes.RecipesRepositoryImpl
 
 @Module
@@ -35,5 +37,9 @@ interface BindingModule {
     @Binds
     @ViewModelScoped
     fun bindRecipesRepository(recipesRepositoryImpl: RecipesRepositoryImpl): RecipesRepository
+
+    @Binds
+    @ViewModelScoped
+    fun bindIngredientsRepository(ingredientsRepositoryImpl: IngredientsRepositoryImpl): IngredientsRepository
 
 }

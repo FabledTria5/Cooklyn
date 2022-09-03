@@ -50,6 +50,9 @@ dependencies {
     implementation(dependencyNotation = Dependencies.hiltCompose)
     kapt(dependencyNotation = Dependencies.hiltCompiler)
 
+    // Paging
+    implementation(dependencyNotation = Dependencies.pagingRuntime)
+
     // Tests
     testImplementation(dependencyNotation = Dependencies.junit)
     androidTestImplementation(dependencyNotation = Dependencies.androidJunit)

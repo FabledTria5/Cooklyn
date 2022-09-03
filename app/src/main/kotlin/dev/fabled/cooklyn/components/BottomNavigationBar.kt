@@ -34,7 +34,7 @@ fun BottomNavigationBar(navController: NavHostController, currentDestination: St
         modifier = Modifier
             .fillMaxWidth()
             .height(bottomBarHeight),
-        containerColor = Color.Transparent
+        containerColor = MaterialTheme.colorScheme.background
     ) {
         bottomNavigationDestinations.forEach { destination ->
             val isSelected = currentDestination == destination.command.route

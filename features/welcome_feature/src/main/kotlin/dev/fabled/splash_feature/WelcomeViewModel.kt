@@ -47,7 +47,8 @@ class WelcomeViewModel @Inject constructor(
     private fun openAuthorizationScreen() =
         navigationManager.navigate(AuthorizationDirections.authorization)
 
-    private fun openHomeScreen() = navigationManager.navigate(PrimaryAppDirections.home)
+    private fun openHomeScreen() =
+        navigationManager.navigate(PrimaryAppDirections.HomeDirections.home)
 
     fun onBoardingCompleted() = viewModelScope.launch {
         saveLaunchState()
